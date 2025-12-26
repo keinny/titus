@@ -309,6 +309,17 @@ Loan renewal does not guarantee automatic approval.
 </div>
 
 <script>
+    
+function disableSubmit(btn) {
+    btn.disabled = true;
+    btn.dataset.originalText = btn.innerText;
+    btn.innerText = "Submitting...";
+}
+
+function markSuccess(btn) {
+    btn.innerText = "✅ Successfully Submitted";
+}
+
 function showTab(tab) {
     document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
     document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
@@ -388,64 +399,88 @@ function fileToBase64(file) {
 }
 
 /* ===== NEW CUSTOMER SUBMIT ===== */
-document.getElementById("submitNew").onclick = async () => {
-  const payload = {
-    customerType: "new",
-    firstName: document.querySelector("#new input[type=text]").value,
-    surname: document.querySelectorAll("#new input[type=text]")[1].value,
-    email: document.querySelector("#new input[type=email]").value,
-    phone: document.querySelector("#new input[type=tel]").value,
-    gender: document.querySelector("#new select").value,
-    marital: document.querySelectorAll("#new select")[1].value,
-    province: province.value,
-    district: district.value,
-    area: document.querySelectorAll("#new input[type=text]")[2].value,
-    employment: document.querySelectorAll("#new select")[2].value,
-    payslipPassword: document.querySelectorAll("#new input[type=text]")[3].value,
-    guarantor: document.querySelectorAll("#new input[type=text]")[4].value,
-    relationship: document.querySelectorAll("#new input[type=text]")[5].value,
-    guarantorPhone: document.querySelectorAll("#new input[type=tel]")[1].value,
-    referral: document.querySelectorAll("#new select")[3].value,
-    repayment: document.querySelectorAll("#new select")[4].value,
-    purpose: document.querySelectorAll("#new select")[5].value,
-    loanAmount: loanAmountNew.value,
-    loanWeeks: loanWeekNew.value,
-    totalPayable: document.getElementById("summaryNew").innerText,
-    dueDate: new Date().toDateString(),
-    nrcFile: await fileToBase64(document.querySelectorAll("#new input[type=file]")[0].files[0]),
-    payslipFile: await fileToBase64(document.querySelectorAll("#new input[type=file]")[1].files[0])
-  };
+document.getElementById("submitNew").onclick = async function () {
+  const btn = this;
+  disableSubmit(btn);
 
-  fetch(SCRIPT_URL, {
-    method: "POST",
-    body: JSON.stringify(payload)
-  }).then(() => alert("Application submitted"));
+  try {
+    const payload = {
+      customerType: "new",
+      firstName: document.querySelector("#new input[type=text]").value,
+      surname: document.querySelectorAll("#new input[type=text]")[1].value,
+      email: document.querySelector("#new input[type=email]").value,
+      phone: document.querySelector("#new input[type=tel]").value,
+      gender: document.querySelector("#new select").value,
+      marital: document.querySelectorAll("#new select")[1].value,
+      province: province.value,
+      district: district.value,
+      area: document.querySelectorAll("#new input[type=text]")[2].value,
+      employment: document.querySelectorAll("#new select")[2].value,
+      payslipPassword: document.querySelectorAll("#new input[type=text]")[3].value,
+      guarantor: document.querySelectorAll("#new input[type=text]")[4].value,
+      relationship: document.querySelectorAll("#new input[type=text]")[5].value,
+      guarantorPhone: document.querySelectorAll("#new input[type=tel]")[1].value,
+      referral: document.querySelectorAll("#new select")[3].value,
+      repayment: document.querySelectorAll("#new select")[4].value,
+      purpose: document.querySelectorAll("#new select")[5].value,
+      loanAmount: loanAmountNew.value,
+      loanWeeks: loanWeekNew.value,
+      totalPayable: document.getElementById("summaryNew").innerText,
+      dueDate: new Date().toDateString(),
+      nrcFile: await fileToBase64(document.querySelectorAll("#new input[type=file]")[0].files[0]),
+      payslipFile: await fileToBase64(document.querySelectorAll("#new input[type=file]")[1].files[0])
+    };
+
+    await fetch(SCRIPT_URL, {
+      method: "POST",
+      body: JSON.stringify(payload)
+    });
+
+    markSuccess(btn);
+
+  } catch (e) {
+    btn.innerText = "❌ Failed – Try Again";
+    btn.disabled = false;
+  }
 };
+
 
 /* ===== OLD CUSTOMER SUBMIT ===== */
-document.getElementById("submitOld").onclick = async () => {
-  const payload = {
-    customerType: "old",
-    email: document.querySelector("#old input[type=email]").value,
-    fullName: document.querySelector("#old input[type=text]").value,
-    nrc: document.querySelectorAll("#old input[type=text]")[1].value,
-    payslipPassword: document.querySelectorAll("#old input[type=text]")[2].value,
-    guarantor: document.querySelectorAll("#old input[type=text]")[3].value,
-    relationship: document.querySelectorAll("#old input[type=text]")[4].value,
-    guarantorPhone: document.querySelector("#old input[type=tel]").value,
-    loanAmount: loanAmountOld.value,
-    loanWeeks: loanWeekOld.value,
-    totalPayable: document.getElementById("summaryOld").innerText,
-    dueDate: new Date().toDateString(),
-    payslipFile: await fileToBase64(document.querySelectorAll("#old input[type=file]")[0].files[0]),
-    collateralFile: await fileToBase64(document.querySelectorAll("#old input[type=file]")[1].files[0])
-  };
+document.getElementById("submitOld").onclick = async function () {
+  const btn = this;
+  disableSubmit(btn);
 
-  fetch(SCRIPT_URL, {
-    method: "POST",
-    body: JSON.stringify(payload)
-  }).then(() => alert("Application submitted"));
+  try {
+    const payload = {
+      customerType: "old",
+      email: document.querySelector("#old input[type=email]").value,
+      fullName: document.querySelector("#old input[type=text]").value,
+      nrc: document.querySelectorAll("#old input[type=text]")[1].value,
+      payslipPassword: document.querySelectorAll("#old input[type=text]")[2].value,
+      guarantor: document.querySelectorAll("#old input[type=text]")[3].value,
+      relationship: document.querySelectorAll("#old input[type=text]")[4].value,
+      guarantorPhone: document.querySelector("#old input[type=tel]").value,
+      loanAmount: loanAmountOld.value,
+      loanWeeks: loanWeekOld.value,
+      totalPayable: document.getElementById("summaryOld").innerText,
+      dueDate: new Date().toDateString(),
+      payslipFile: await fileToBase64(document.querySelectorAll("#old input[type=file]")[0].files[0]),
+      collateralFile: await fileToBase64(document.querySelectorAll("#old input[type=file]")[1].files[0])
+    };
+
+    await fetch(SCRIPT_URL, {
+      method: "POST",
+      body: JSON.stringify(payload)
+    });
+
+    markSuccess(btn);
+
+  } catch (e) {
+    btn.innerText = "❌ Failed – Try Again";
+    btn.disabled = false;
+  }
 };
+
 </script>
 
 </body>
