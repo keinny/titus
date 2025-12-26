@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AFRICO Cash Advance Limited</title>
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background: #f4f4f4;
+    padding: 20px;
+}
+.container {
+    max-width: 850px;
+    margin: auto;
+    background: white;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+h2 {
+    text-align: center;
+    color: #00529B;
+}
+.logo {
+    text-align: center;
+    margin-bottom: 15px;
+}
+.logo img {
+    max-width: 250px;
+}
+.tabs {
+    display: flex;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #00529B;
+}
+.tab {
+    flex: 1;
+    padding: 12px;
+    text-align: center;
+    background: #ddd;
+    cursor: pointer;
+    font-weight: bold;
+    border-radius: 8px 8px 0 0;
+    margin: 0 2px;
+}
+.tab.active {
+    background: #00529B;
+    color: #ffc21f;
+}
+.section {
+    display: none;
+}
+.section.active {
+    display: block;
+}
+label {
+    font-weight: bold;
+    display: block;
+    margin-top: 12px;
+}
+input, select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 4px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+.summary {
+    background: #eef6ff;
+    padding: 15px;
+    margin-top: 15px;
+    border-left: 5px solid #00529B;
+}
+button {
+    background: #00529B;
+    color: #ffc21f;
+    padding: 15px;
+    border: none;
+    width: 100%;
+    margin-top: 20px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 5px;
+}
+button:disabled {
+    background: #aaa;
+    cursor: not-allowed;
+}
+.disclaimer {
+    background: #fff3cd;
+    padding: 15px;
+    margin-top: 20px;
+    font-size: 14px;
+    border: 1px solid #ffeeba;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="logo">
+    <img src="images/logo_3.png" alt="AFRICO Cash Advance Limited Logo">
+</div>
+
+<h2>Elevating finances, Empowering Lives</h2>
+
+<div class="tabs">
+    <div class="tab active" onclick="showTab('new')">New Customer</div>
+    <div class="tab" onclick="showTab('old')">Existing Customer</div>
+</div>
+
+<!-- ================= NEW CUSTOMER ================= -->
+<div class="section active" id="new">
+
+<h3>Loan Application Form – New Customer</h3>
+
+<label>First Name *</label>
+<input type="text" required>
+
+<label>Surname *</label>
+<input type="text" required>
+
+<label>Email *</label>
+<input type="email" required>
+
+<label>Phone Number *</label>
+<input type="tel" required>
+
+<label>Gender *</label>
+<select required>
+    <option value="">Select</option>
+    <option>Male</option>
+    <option>Female</option>
+</select>
+
+<label>Marital Status *</label>
+<select required>
+    <option value="">Select</option>
+    <option>Single</option>
+    <option>Married</option>
+</select>
+
+<label>Province *</label>
+<select id="province" onchange="loadDistricts()" required>
+    <option value="">Select Province</option>
+    <option value="Central">Central</option>
+    <option value="Copperbelt">Copperbelt</option>
+    <option value="Eastern">Eastern</option>
+    <option value="Luapula">Luapula</option>
+    <option value="Lusaka">Lusaka</option>
+    <option value="Muchinga">Muchinga</option>
+    <option value="Northern">Northern</option>
+    <option value="North-Western">North-Western</option>
+    <option value="Southern">Southern</option>
+    <option value="Western">Western</option>
+</select>
+
+<label>District *</label>
+<select id="district" required>
+    <option value="">Select District</option>
+</select>
+
+<label>Area *</label>
+<input type="text" required>
+
+<label>Attach NRC / ID *</label>
+<input type="file" required>
+
+<label>Employment Status *</label>
+<select required>
+    <option value="">Select</option>
+    <option>Employed</option>
+    <option>Self-Employed</option>
+    <option>Unemployed</option>
+</select>
+
+<label>Upload Latest Payslip / Airtel Money Statement *</label>
+<input type="file" required>
+
+<label>Password (if required to view statement)</label>
+<input type="text">
+
+<label>Guarantor Name *</label>
+<input type="text" required>
+
+<label>Relationship with Guarantor *</label>
+<input type="text" required>
+
+<label>Guarantor Phone # *</label>
+<input type="tel" required>
+
+<label>How did you know about us? *</label>
+<select required>
+    <option value="">Select</option>
+    <option>Facebook / WhatsApp / TikTok</option>
+    <option>Through a Friend</option>
+    <option>One-on-one Encounter</option>
+</select>
+
+<label>Repayment Method *</label>
+<select required>
+    <option value="">Select</option>
+    <option>Mobile Money</option>
+    <option>Bank Transfer</option>
+    <option>Cash</option>
+</select>
+
+<label>Purpose of The Loan *</label>
+<select required>
+    <option value="">Select</option>
+    <option>Business</option>
+    <option>School/Tuition Fees</option>
+    <option>Medical</option>
+    <option>Rent</option>
+    <option>Emergency</option>
+</select>
+
+<h4>LOAN DETAILS</h4>
+
+<label>Loan Amount (ZMW) <i>Maximum amount is 1000 (ZMW)</i></label>
+<input type="number" id="loanAmountNew" min="50" max="1000" oninput="limitNewLoan(); calculate('new')" required>
+
+<label>Loan Duration</label>
+<select id="loanWeekNew" onchange="calculate('new')">
+    <option value="">Select</option>
+    <option value="1">7 Days (15%)</option>
+    <option value="2">14 Days (20%)</option>
+    <option value="3">21 Days (30%)</option>
+    <option value="4">30 Days (35%)</option>
+</select>
+
+<div class="summary" id="summaryNew"></div>
+
+<div class="disclaimer">
+<strong>DISCLAIMER – IMPORTANT NOTICE:</strong><br>
+This Agreement is executed electronically and shall be deemed legally binding once submitted.
+</div>
+
+<input type="checkbox" id="termsNew" onclick="toggleSubmit('new')">
+<label>I agree to the <a href="terms.html" target="_blank">Terms and Conditions</a></label>
+
+<button id="submitNew" disabled>Submit Application</button>
+
+</div>
+
+<!-- ================= EXISTING CUSTOMER ================= -->
+<div class="section" id="old">
+
+<h3>Loan Agreement – Existing Customer</h3>
+
+<label>Email *</label>
+<input type="email" required>
+
+<label>Borrower Full Name *</label>
+<input type="text" required>
+
+<label>NRC / ID *</label>
+<input type="text" required>
+
+<label>Upload Latest Payslip / Airtel Money Statement *</label>
+<input type="file" required>
+
+<label>Password (if required to view statement)</label>
+<input type="text">
+
+<label>Guarantor Name *</label>
+<input type="text" required>
+
+<label>Relationship with Guarantor *</label>
+<input type="text" required>
+
+<label>Guarantor Phone # *</label>
+<input type="tel" required>
+
+<label>Loan Amount (ZMW) <i>Maximum amount is 5000 (ZMW)</i></label>
+<input type="number" id="loanAmountOld" min="500" max="5000" oninput="limitOldLoan(); calculate('old')" required>
+
+<label>Loan Duration</label>
+<select id="loanWeekOld" onchange="calculate('old')">
+    <option value="">Select</option>
+    <option value="1">7 Days (15%)</option>
+    <option value="2">14 Days (20%)</option>
+    <option value="3">21 Days (30%)</option>
+    <option value="4">30 Days (35%)</option>
+</select>
+
+<div class="summary" id="summaryOld"></div>
+
+<label>Upload Collateral *</label>
+<input type="file" required>
+
+<div class="disclaimer">
+<strong>DISCLAIMER:</strong><br>
+Loan renewal does not guarantee automatic approval.
+</div>
+
+<input type="checkbox" id="termsOld" onclick="toggleSubmit('old')">
+<label>I agree to the <a href="terms.html" target="_blank">Terms and Conditions</a></label>
+
+<button id="submitOld" disabled>Submit Application</button>
+
+</div>
+
+</div>
+
+<script>
+function showTab(tab) {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.getElementById(tab).classList.add('active');
+    document.querySelectorAll('.tab')[tab === 'new' ? 0 : 1].classList.add('active');
+}
+
+function toggleSubmit(type) {
+    document.getElementById(type === 'new' ? 'submitNew' : 'submitOld').disabled =
+        !document.getElementById(type === 'new' ? 'termsNew' : 'termsOld').checked;
+}
+
+function calculate(type) {
+    const amount = document.getElementById(type === 'new' ? 'loanAmountNew' : 'loanAmountOld').value;
+    const week = document.getElementById(type === 'new' ? 'loanWeekNew' : 'loanWeekOld').value;
+    const summary = document.getElementById(type === 'new' ? 'summaryNew' : 'summaryOld');
+
+    if (!amount || !week) return;
+
+    const rates = {1:0.15, 2:0.20, 3:0.30, 4:0.35};
+    const total = amount * (1 + rates[week]);
+    const due = new Date();
+    due.setDate(due.getDate() + (week * 7));
+
+    summary.innerHTML = `<strong>Total Payable:</strong> ZMW ${total.toFixed(2)}<br>
+                         <strong>Due Date:</strong> ${due.toDateString()}`;
+}
+
+function limitNewLoan() {
+    if (loanAmountNew.value > 1000) loanAmountNew.value = 1000;
+}
+function limitOldLoan() {
+    if (loanAmountOld.value > 5000) loanAmountOld.value = 5000;
+}
+
+const districtsByProvince = {
+    "Central":["Chibombo","Chisamba","Chitambo","Kabwe","Kapiri Mposhi","Luano","Mkushi","Mumbwa","Ngabwe","Serenje"],
+    "Copperbelt":["Chililabombwe","Chingola","Kalulushi","Kitwe","Luanshya","Lufwanyama","Masaiti","Mpongwe","Mufulira","Ndola"],
+    "Eastern":["Chadiza","Chasefu","Chipangali","Chipata","Kasenengwa","Katete","Lumezi","Lundazi","Mambwe","Nyimba","Petauke","Sinda","Vubwi"],
+    "Luapula":["Chembe","Chiengi","Chifunabuli","Chipili","Kawambwa","Lunga","Mansa","Milenge","Mwansabombwe","Mwense","Nchelenge","Samfya"],
+    "Lusaka":["Chilanga","Chongwe","Kafue","Luangwa","Lusaka"],
+    "Muchinga":["Chama","Chinsali","Isoka","Kanchibiya","Lavushimanda","Mafinga","Mpika","Nakonde","Shiwangandu"],
+    "Northern":["Chilubi","Kaputa","Kasama","Luwingu","Mbala","Mporokoso","Mpulungu","Mungwi","Nsama","Senga Hill"],
+    "North-Western":["Chavuma","Ikelenge","Kabompo","Kalumbila","Kasempa","Manyinga","Mufumbwe","Mushindamo","Mwinilunga","Solwezi","Zambezi"],
+    "Southern":["Chikankata","Chirundu","Choma","Gwembe","Itezhi-Tezhi","Kalomo","Kazungula","Livingstone","Mazabuka","Monze","Namwala","Pemba","Siavonga","Sinazongwe","Zimba"],
+    "Western":["Kalabo","Kaoma","Limulunga","Luampa","Lukulu","Mitete","Mongu","Mulobezi","Mwandi","Nalolo","Nkeyema","Senanga","Sesheke","Shangombo","Sikongo"]
+};
+
+function loadDistricts() {
+    const province = document.getElementById("province").value;
+    const district = document.getElementById("district");
+    district.innerHTML = '<option value="">Select District</option>';
+    if (!districtsByProvince[province]) return;
+
+    districtsByProvince[province].forEach(d => {
+        const opt = document.createElement("option");
+        opt.value = d;
+        opt.textContent = d;
+        district.appendChild(opt);
+    });
+}
+
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbz7M9ZzezENjDIMUdBvrZ3GQVUMaCsGnPUDSkWlWkYQqQPEnrIv1hQlYMuu-5BgupVyOg/exec";
+
+function fileToBase64(file) {
+  return new Promise(resolve => {
+    const reader = new FileReader();
+    reader.onload = () => {
+      resolve({
+        name: file.name,
+        type: file.type,
+        data: reader.result.split(",")[1]
+      });
+    };
+    reader.readAsDataURL(file);
+  });
+}
+
+/* ===== NEW CUSTOMER SUBMIT ===== */
+document.getElementById("submitNew").onclick = async () => {
+  const payload = {
+    customerType: "new",
+    firstName: document.querySelector("#new input[type=text]").value,
+    surname: document.querySelectorAll("#new input[type=text]")[1].value,
+    email: document.querySelector("#new input[type=email]").value,
+    phone: document.querySelector("#new input[type=tel]").value,
+    gender: document.querySelector("#new select").value,
+    marital: document.querySelectorAll("#new select")[1].value,
+    province: province.value,
+    district: district.value,
+    area: document.querySelectorAll("#new input[type=text]")[2].value,
+    employment: document.querySelectorAll("#new select")[2].value,
+    payslipPassword: document.querySelectorAll("#new input[type=text]")[3].value,
+    guarantor: document.querySelectorAll("#new input[type=text]")[4].value,
+    relationship: document.querySelectorAll("#new input[type=text]")[5].value,
+    guarantorPhone: document.querySelectorAll("#new input[type=tel]")[1].value,
+    referral: document.querySelectorAll("#new select")[3].value,
+    repayment: document.querySelectorAll("#new select")[4].value,
+    purpose: document.querySelectorAll("#new select")[5].value,
+    loanAmount: loanAmountNew.value,
+    loanWeeks: loanWeekNew.value,
+    totalPayable: document.getElementById("summaryNew").innerText,
+    dueDate: new Date().toDateString(),
+    nrcFile: await fileToBase64(document.querySelectorAll("#new input[type=file]")[0].files[0]),
+    payslipFile: await fileToBase64(document.querySelectorAll("#new input[type=file]")[1].files[0])
+  };
+
+  fetch(SCRIPT_URL, {
+    method: "POST",
+    body: JSON.stringify(payload)
+  }).then(() => alert("Application submitted"));
+};
+
+/* ===== OLD CUSTOMER SUBMIT ===== */
+document.getElementById("submitOld").onclick = async () => {
+  const payload = {
+    customerType: "old",
+    email: document.querySelector("#old input[type=email]").value,
+    fullName: document.querySelector("#old input[type=text]").value,
+    nrc: document.querySelectorAll("#old input[type=text]")[1].value,
+    payslipPassword: document.querySelectorAll("#old input[type=text]")[2].value,
+    guarantor: document.querySelectorAll("#old input[type=text]")[3].value,
+    relationship: document.querySelectorAll("#old input[type=text]")[4].value,
+    guarantorPhone: document.querySelector("#old input[type=tel]").value,
+    loanAmount: loanAmountOld.value,
+    loanWeeks: loanWeekOld.value,
+    totalPayable: document.getElementById("summaryOld").innerText,
+    dueDate: new Date().toDateString(),
+    payslipFile: await fileToBase64(document.querySelectorAll("#old input[type=file]")[0].files[0]),
+    collateralFile: await fileToBase64(document.querySelectorAll("#old input[type=file]")[1].files[0])
+  };
+
+  fetch(SCRIPT_URL, {
+    method: "POST",
+    body: JSON.stringify(payload)
+  }).then(() => alert("Application submitted"));
+};
+</script>
+
+</body>
+</html>

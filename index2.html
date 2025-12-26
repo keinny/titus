@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AFRICO Cash Advance Limited</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <style>
+        body { font-family: Arial, sans-serif; background: #f4f4f4; padding: 20px; }
+        .container { max-width: 850px; margin: auto; background: white; padding: 25px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        h2 { text-align: center; color: #00529B; }
+        .logo { text-align: center; margin-bottom: 15px; }
+        .logo img { max-width: 250px; height: auto; }
+        .tabs { display: flex; margin-bottom: 20px; border-bottom: 2px solid #00529B; }
+        .tab { flex: 1; padding: 12px; text-align: center; background: #ddd; cursor: pointer; font-weight: bold; border-radius: 8px 8px 0 0; margin: 0 2px; }
+        .tab.active { background: #00529B; color: #ffc21f; }
+        .section { display: none; }
+        .section.active { display: block; }
+        label { font-weight: bold; display: block; margin-top: 12px; }
+        input, select, textarea { width: 100%; padding: 10px; margin-top: 4px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
+        .summary { background: #eef6ff; padding: 15px; margin-top: 15px; border-left: 5px solid #00529B; font-size: 15px; line-height: 1.5; }
+        button { background: #00529B; color: #ffc21f; padding: 15px; border: none; width: 100%; margin-top: 20px; font-size: 18px; font-weight: bold; cursor: pointer; border-radius: 5px; }
+        button:disabled { background: #aaa; cursor: not-allowed; }
+        .disclaimer { background: #fff3cd; padding: 15px; margin-top: 20px; font-size: 14px; border: 1px solid #ffeeba; }
+        /* Hidden Agreement used for PDF Generation */
+        #agreement-wrapper { position: absolute; left: -9999px; top: 0; }
+        #agreement { width: 700px; padding: 50px; background: white; color: black; line-height: 1.6; }
+        #pdfPreview { width: 100%; height: 500px; border: 2px solid #00529B; margin-top: 20px; display: none; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="logo">
+        <img src="images/logo_3.png" alt="AFRICO Logo">
+    </div>
+    <h2>Elevating Finances, Empowering Lives</h2>
+
+    <div class="tabs">
+        <div id="tabNew" class="tab active" onclick="showTab('new')">New Customer</div>
+        <div id="tabOld" class="tab" onclick="showTab('old')">Existing Customer</div>
+    </div>
+
+    <div class="section active" id="new">
+        <h3>Loan Application – New Customer</h3>
+        <label>First Name *</label><input type="text" id="firstName" required>
+        <label>Surname *</label><input type="text" id="surname" required>
+        <label>Email *</label>
+<input type="email" required>
+
+<label>Phone Number *</label>
+<input type="tel" required>
+
+<label>Gender *</label>
+<select required>
+    <option value="">Select</option>
+    <option>Male</option>
+    <option>Female</option>
+</select>
+
+<label>Marital Status *</label>
+<select required>
+    <option value="">Select</option>
+    <option>Single</option>
+    <option>Married</option>
+</select>
+
+<label>Province *</label>
+<select id="province" onchange="loadDistricts()" required>
+    <option value="">Select Province</option>
+    <option value="Central">Central</option>
+    <option value="Copperbelt">Copperbelt</option>
+    <option value="Eastern">Eastern</option>
+    <option value="Luapula">Luapula</option>
+    <option value="Lusaka">Lusaka</option>
+    <option value="Muchinga">Muchinga</option>
+    <option value="Northern">Northern</option>
+    <option value="North-Western">North-Western</option>
+    <option value="Southern">Southern</option>
+    <option value="Western">Western</option>
+</select>
+
+<label>District *</label>
+<select id="district" required>
+    <option value="">Select District</option>
+</select>
+
+<label>Area *</label>
+<input type="text" required>
+
+<label>Attach NRC / ID *</label>
+<input type="file" required>
+
+<label>Employment Status *</label>
+<select required>
+    <option value="">Select</option>
+    <option>Employed</option>
+    <option>Self-Employed</option>
+    <option>Unemployed</option>
+</select>
+
+<label>Upload Latest Payslip / Airtel Money Statement *</label>
+<input type="file" required>
+
+<label>Password (if required to view statement)</label>
+<input type="text">
+
+<label>Guarantor Name *</label>
+<input type="text" required>
+
+<label>Relationship with Guarantor *</label>
+<input type="text" required>
+
+<label>Guarantor Phone # *</label>
+<input type="tel" placeholder="e.g. 097 123 4567" required>
+
+<label>How did you know about us? *</label>
+<select required>
+    <option value="">Select</option>
+    <option>Facebook / WhatsApp / TikTok</option>
+    <option>Through a Friend</option>
+    <option>One-on-one Encounter</option>
+</select>
+
+<label>Repayment Method *</label>
+<select required>
+    <option value="">Select</option>
+    <option>Mobile Money</option>
+    <option>Bank Transfer</option>
+    <option>Cash</option>
+</select>
+
+<label>Purpose of The Loan *</label>
+<select required>
+    <option value="">Select</option>
+    <option>Business</option>
+    <option>School/Tuition Fees</option>
+    <option>Medical</option>
+    <option>Rent</option>
+    <option>Emergency</option>
+</select>
+
+        <label>Loan Amount (ZMW) (Max 1000)</label>
+        <input type="number" id="loanAmountNew" min="50" max="1000" oninput="limitAndCalc('new')">
+        <label>Loan Duration</label>
+        <select id="loanWeekNew" onchange="limitAndCalc('new')">
+            <option value="">Select Duration</option>
+            <option value="1">7 Days (15%)</option>
+            <option value="2">14 Days (20%)</option>
+            <option value="3">21 Days (30%)</option>
+            <option value="4">30 Days (35%)</option>
+        </select>
+        <div class="summary" id="summaryNew">Enter amount and duration to see summary.</div>
+        <input type="checkbox" id="termsNew" onclick="toggleSubmit('new')"> I agree to Terms.
+        <button id="submitNew" disabled onclick="handleGenerate()">Generate PDF Agreement</button>
+    </div>
+
+    <div class="section" id="old">
+        <h3>Loan Application – Existing Customer</h3>
+        <label>Full Name *</label><input type="text" id="fullNameOld" required>
+        <label>Email *</label>
+<input type="email" required>
+
+<label>Borrower Full Name *</label>
+<input type="text" id="oldFullName" required>
+
+<label>NRC / ID *</label>
+<input type="text" required>
+
+<label>Upload Latest Payslip / Airtel Money Statement *</label>
+<input type="file" required>
+
+<label>Password (if required to view statement)</label>
+<input type="text">
+
+<label>Guarantor Name *</label>
+<input type="text" required>
+
+<label>Relationship with Guarantor *</label>
+<input type="text" required>
+
+<label>Guarantor Phone # *</label>
+<input type="tel" placeholder="e.g. 097 123 4567" required>
+        <label>Loan Amount (ZMW) (Max 5000)</label>
+        <input type="number" id="loanAmountOld" min="500" max="5000" oninput="limitAndCalc('old')">
+        <label>Loan Duration</label>
+        <select id="loanWeekOld" onchange="limitAndCalc('old')">
+            <option value="">Select Duration</option>
+            <option value="1">7 Days (15%)</option>
+            <option value="2">14 Days (20%)</option>
+            <option value="3">21 Days (30%)</option>
+            <option value="4">30 Days (35%)</option>
+        </select>
+        <div class="summary" id="summaryOld">Enter amount and duration to see summary.</div>
+        <input type="checkbox" id="termsOld" onclick="toggleSubmit('old')"> I agree to Terms.
+        <button id="submitOld" disabled onclick="handleGenerate()">Generate PDF Agreement</button>
+    </div>
+
+    <iframe id="pdfPreview"></iframe>
+    <button id="savePdfBtn" style="display:none; background:#28a745;" onclick="downloadPDF()">Download Final PDF</button>
+</div>
+
+<div id="agreement-wrapper">
+    <div id="agreement">
+        <div style="text-align:center;">
+            <img src="images/logo_3.png" style="max-width:150px;">
+            <h1 style="color:#00529B;">LOAN AGREEMENT</h1>
+            <p><strong>AFRICO Cash Advance Limited</strong></p>
+            <hr>
+        </div>
+        <p>This agreement confirms that <strong id="pdf_client"></strong> has applied for a loan.</p>
+        <table style="width:100%; border-collapse: collapse; margin: 20px 0;">
+            <tr><td style="padding:8px; border:1px solid #ddd;">Principal Amount:</td><td style="padding:8px; border:1px solid #ddd;">ZMW <span id="pdf_amt"></span></td></tr>
+            <tr><td style="padding:8px; border:1px solid #ddd;">Total Repayable:</td><td style="padding:8px; border:1px solid #ddd;"><span id="pdf_total"></span></td></tr>
+            <tr><td style="padding:8px; border:1px solid #ddd;">Due Date:</td><td style="padding:8px; border:1px solid #ddd;"><span id="pdf_due"></span></td></tr>
+        </table>
+        <p>Date of Agreement: <span id="pdf_date"></span></p>
+        <div style="margin-top:50px;">
+            <div style="float:left; width:45%;"><strong>Borrower:</strong><br><br>____________________<br><span id="pdf_sign"></span></div>
+            <div style="float:right; width:45%; text-align:right;"><strong>Lender:</strong><br><br><img src="images/signature.png" style="max-width:120px;"><br>Manager, AFRICO</div>
+        </div>
+    </div>
+</div>
+
+<script>
+    let activeTab = 'new';
+    let pdfBlob = null;
+
+    function showTab(type) {
+        activeTab = type;
+        document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+        document.getElementById(type).classList.add('active');
+        document.getElementById(type === 'new' ? 'tabNew' : 'tabOld').classList.add('active');
+    }
+
+    function toggleSubmit(type) {
+        const check = document.getElementById(type === 'new' ? 'termsNew' : 'termsOld');
+        const btn = document.getElementById(type === 'new' ? 'submitNew' : 'submitOld');
+        btn.disabled = !check.checked;
+    }
+
+    function limitAndCalc(type) {
+        const amtInput = document.getElementById(type === 'new' ? 'loanAmountNew' : 'loanAmountOld');
+        const weekInput = document.getElementById(type === 'new' ? 'loanWeekNew' : 'loanWeekOld');
+        const summary = document.getElementById(type === 'new' ? 'summaryNew' : 'summaryOld');
+        
+        let amt = parseFloat(amtInput.value) || 0;
+        const max = type === 'new' ? 1000 : 5000;
+        if (amt > max) { amt = max; amtInput.value = max; }
+
+        if (amt > 0 && weekInput.value) {
+            const rates = {1:0.15, 2:0.20, 3:0.30, 4:0.35};
+            const total = amt * (1 + rates[weekInput.value]);
+            const date = new Date();
+            date.setDate(date.getDate() + (weekInput.value * 7));
+            summary.innerHTML = `<strong>Total Payable:</strong> ZMW ${total.toFixed(2)}<br><strong>Due Date:</strong> ${date.toDateString()}`;
+        }
+    }
+
+    async function handleGenerate() {
+        // 1. Collect Data
+        let name = "";
+        let amt = "";
+        let sumText = "";
+
+        if (activeTab === 'new') {
+            name = document.getElementById('firstName').value + " " + document.getElementById('surname').value;
+            amt = document.getElementById('loanAmountNew').value;
+            sumText = document.getElementById('summaryNew').innerText;
+        } else {
+            name = document.getElementById('fullNameOld').value;
+            amt = document.getElementById('loanAmountOld').value;
+            sumText = document.getElementById('summaryOld').innerText;
+        }
+
+        if (!name.trim() || !amt) { alert("Please fill in Name and Loan Amount"); return; }
+
+        // 2. Populate PDF Template
+        document.getElementById('pdf_client').innerText = name;
+        document.getElementById('pdf_amt').innerText = amt;
+        document.getElementById('pdf_total').innerText = sumText.split('\n')[0] || "";
+        document.getElementById('pdf_due').innerText = sumText.split('\n')[1] || "";
+        document.getElementById('pdf_date').innerText = new Date().toLocaleDateString();
+        document.getElementById('pdf_sign').innerText = name;
+
+        // 3. Generate
+        const element = document.getElementById('agreement');
+        const opt = {
+            margin: 10,
+            filename: 'Loan_Agreement.pdf',
+            image: { type: 'jpeg', quality: 0.98 },
+            html2canvas: { scale: 2, useCORS: true, letterRendering: true },
+            jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+        };
+
+        // Give UI time to update
+        setTimeout(() => {
+            html2pdf().set(opt).from(element).outputPdf('blob').then(blob => {
+                pdfBlob = blob;
+                const url = URL.createObjectURL(blob);
+                const iframe = document.getElementById('pdfPreview');
+                iframe.src = url;
+                iframe.style.display = "block";
+                document.getElementById('savePdfBtn').style.display = "block";
+                iframe.scrollIntoView({ behavior: "smooth" });
+            });
+        }, 300);
+    }
+
+    function downloadPDF() {
+        if (!pdfBlob) return;
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(pdfBlob);
+        link.download = "AFRICO_Loan_Agreement.pdf";
+        link.click();
+    }
+    const districtsByProvince = {
+    "Central":["Chibombo","Chisamba","Chitambo","Kabwe","Kapiri Mposhi","Luano","Mkushi","Mumbwa","Ngabwe","Serenje"],
+    "Copperbelt":["Chililabombwe","Chingola","Kalulushi","Kitwe","Luanshya","Lufwanyama","Masaiti","Mpongwe","Mufulira","Ndola"],
+    "Eastern":["Chadiza","Chasefu","Chipangali","Chipata","Kasenengwa","Katete","Lumezi","Lundazi","Mambwe","Nyimba","Petauke","Sinda","Vubwi"],
+    "Luapula":["Chembe","Chiengi","Chifunabuli","Chipili","Kawambwa","Lunga","Mansa","Milenge","Mwansabombwe","Mwense","Nchelenge","Samfya"],
+    "Lusaka":["Chilanga","Chongwe","Kafue","Luangwa","Lusaka"],
+    "Muchinga":["Chama","Chinsali","Isoka","Kanchibiya","Lavushimanda","Mafinga","Mpika","Nakonde","Shiwangandu"],
+    "Northern":["Chilubi","Kaputa","Kasama","Lunte","Lupososhi","Luwingu","Mbala","Mporokoso","Mpulungu","Mungwi","Nsama","Senga Hill"],
+    "North-Western":["Chavuma","Ikelenge","Kabompo","Kalumbila","Kasempa","Manyinga","Mufumbwe","Mushindamo","Mwinilunga","Solwezi","Zambezi"],
+    "Southern":["Chikankata","Chirundu","Choma","Gwembe","Itezhi-Tezhi","Kalomo","Kazungula","Livingstone","Mazabuka","Monze","Namwala","Pemba","Siavonga","Sinazongwe","Zimba"],
+    "Western":["Kalabo","Kaoma","Limulunga","Luampa","Lukulu","Mitete","Mongu","Mulobezi","Mwandi","Nalolo","Nkeyema","Senanga","Sesheke","Shangombo","Sikongo"]
+};
+
+function loadDistricts() {
+    const province = document.getElementById("province").value;
+    const district = document.getElementById("district");
+    district.innerHTML = '<option value="">Select District</option>';
+    if (!districtsByProvince[province]) return;
+
+    districtsByProvince[province].forEach(d => {
+        const opt = document.createElement("option");
+        opt.value = d;
+        opt.textContent = d;
+        district.appendChild(opt);
+    });
+</script>
+
+</body>
+</html>
