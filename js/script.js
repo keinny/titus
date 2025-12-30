@@ -1,3 +1,5 @@
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyl3HrkN_dIedh7SnFZF-8VPwOJlN1FQy8JHmLoRPEHlCjoWYsJkbNt9ADweW0Dh4eJ/exec";
+
 function disableSubmit(btn) {
     btn.disabled = true;
     btn.dataset.originalText = btn.innerText;
@@ -37,10 +39,12 @@ function calculate(type) {
 }
 
 function limitNewLoan() {
-    if (loanAmountNew.value > 1000) loanAmountNew.value = 1000;
+    const val = document.getElementById("loanAmountNew");
+    if (val.value > 1000) val.value = 1000;
 }
 function limitOldLoan() {
-    if (loanAmountOld.value > 5000) loanAmountOld.value = 5000;
+    const val = document.getElementById("loanAmountOld");
+    if (val.value > 10000) val.value = 10000;
 }
 
 const districtsByProvince = {
@@ -70,9 +74,8 @@ function loadDistricts() {
     });
 }
 
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbz7M9ZzezENjDIMUdBvrZ3GQVUMaCsGnPUDSkWlWkYQqQPEnrIv1hQlYMuu-5BgupVyOg/exec";
-
 function fileToBase64(file) {
+  if (!file) return Promise.resolve({name: "none", type: "none", data: ""});
   return new Promise(resolve => {
     const reader = new FileReader();
     reader.onload = () => {
@@ -87,84 +90,71 @@ function fileToBase64(file) {
 }
 
 /* ===== NEW CUSTOMER SUBMIT ===== */
-document.getElementById("submitNew").onclick = async function () {
-  const btn = this;
+async function submitForm(type) {
+  const btnId = type === 'new' ? 'submitNew' : 'submitOld';
+  const btn = document.getElementById(btnId);
   disableSubmit(btn);
 
   try {
-    const payload = {
-      customerType: "new",
-      firstName: document.querySelector("#new input[type=text]").value,
-      surname: document.querySelectorAll("#new input[type=text]")[1].value,
-      email: document.querySelector("#new input[type=email]").value,
-      phone: document.querySelector("#new input[type=tel]").value,
-      gender: document.querySelector("#new select").value,
-      marital: document.querySelectorAll("#new select")[1].value,
-      province: province.value,
-      district: district.value,
-      area: document.querySelectorAll("#new input[type=text]")[2].value,
-      employment: document.querySelectorAll("#new select")[2].value,
-      payslipPassword: document.querySelectorAll("#new input[type=text]")[3].value,
-      guarantor: document.querySelectorAll("#new input[type=text]")[4].value,
-      relationship: document.querySelectorAll("#new input[type=text]")[5].value,
-      guarantorPhone: document.querySelectorAll("#new input[type=tel]")[1].value,
-      referral: document.querySelectorAll("#new select")[3].value,
-      repayment: document.querySelectorAll("#new select")[4].value,
-      purpose: document.querySelectorAll("#new select")[5].value,
-      loanAmount: loanAmountNew.value,
-      loanWeeks: loanWeekNew.value,
-      totalPayable: document.getElementById("summaryNew").innerText,
-      dueDate: new Date().toDateString(),
-      nrcFile: await fileToBase64(document.querySelectorAll("#new input[type=file]")[0].files[0]),
-      payslipFile: await fileToBase64(document.querySelectorAll("#new input[type=file]")[1].files[0])
-    };
+    let payload = {};
 
-    await fetch(SCRIPT_URL, {
+    if (type === 'new') {
+      payload = {
+        customerType: "new",
+        firstName: document.getElementById("firstName").value,
+        surname: document.getElementById("surname").value,
+        email: document.getElementById("emailNew").value,
+        phone: document.getElementById("phone").value,
+        gender: document.getElementById("gender").value,
+        marital: document.getElementById("marital").value,
+        province: document.getElementById("province").value,
+        district: document.getElementById("district").value,
+        area: document.getElementById("area").value,
+        employment: document.getElementById("employment").value,
+        guarantor: document.getElementById("guarantorNew").value,
+        relationship: document.getElementById("relationshipNew").value,
+        guarantorPhone: document.getElementById("guarantorPhoneNew").value,
+        referral: document.getElementById("referral").value,
+        repayment: document.getElementById("repayment").value,
+        purpose: document.getElementById("purpose").value,
+        loanAmount: document.getElementById("loanAmountNew").value,
+        loanWeeks: document.getElementById("loanWeekNew").value,
+        totalPayable: document.getElementById("summaryNew").innerText,
+        nrcFile: await fileToBase64(document.getElementById("nrcFile").files[0]),
+        payslipFile: await fileToBase64(document.getElementById("payslipFileNew").files[0])
+      };
+    } else {
+      payload = {
+        customerType: "old",
+        email: document.getElementById("emailOld").value,
+        fullName: document.getElementById("fullNameOld").value,
+        nrc: document.getElementById("nrcOld").value,
+        guarantor: document.getElementById("guarantorOld").value,
+        relationship: document.getElementById("relationshipOld").value,
+        guarantorPhone: document.getElementById("guarantorPhoneOld").value,
+        loanAmount: document.getElementById("loanAmountOld").value,
+        loanWeeks: document.getElementById("loanWeekOld").value,
+        totalPayable: document.getElementById("summaryOld").innerText,
+        payslipFile: await fileToBase64(document.getElementById("payslipFileOld").files[0]),
+        collateralFile: await fileToBase64(document.getElementById("collateralFile").files[0])
+      };
+    }
+
+    const response = await fetch(SCRIPT_URL, {
       method: "POST",
       body: JSON.stringify(payload)
     });
 
-    markSuccess(btn);
+    const result = await response.text();
+    if (result.includes("SUCCESS")) {
+      markSuccess(btn);
+    } else {
+      throw new Error(result);
+    }
 
   } catch (e) {
+    console.error(e);
     btn.innerText = "❌ Failed – Try Again";
     btn.disabled = false;
   }
-};
-
-
-/* ===== OLD CUSTOMER SUBMIT ===== */
-document.getElementById("submitOld").onclick = async function () {
-  const btn = this;
-  disableSubmit(btn);
-
-  try {
-    const payload = {
-      customerType: "old",
-      email: document.querySelector("#old input[type=email]").value,
-      fullName: document.querySelector("#old input[type=text]").value,
-      nrc: document.querySelectorAll("#old input[type=text]")[1].value,
-      payslipPassword: document.querySelectorAll("#old input[type=text]")[2].value,
-      guarantor: document.querySelectorAll("#old input[type=text]")[3].value,
-      relationship: document.querySelectorAll("#old input[type=text]")[4].value,
-      guarantorPhone: document.querySelector("#old input[type=tel]").value,
-      loanAmount: loanAmountOld.value,
-      loanWeeks: loanWeekOld.value,
-      totalPayable: document.getElementById("summaryOld").innerText,
-      dueDate: new Date().toDateString(),
-      payslipFile: await fileToBase64(document.querySelectorAll("#old input[type=file]")[0].files[0]),
-      collateralFile: await fileToBase64(document.querySelectorAll("#old input[type=file]")[1].files[0])
-    };
-
-    await fetch(SCRIPT_URL, {
-      method: "POST",
-      body: JSON.stringify(payload)
-    });
-
-    markSuccess(btn);
-
-  } catch (e) {
-    btn.innerText = "❌ Failed – Try Again";
-    btn.disabled = false;
-  }
-};
+}

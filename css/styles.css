@@ -88,3 +88,22 @@ button:disabled {
     font-size: 14px;
     border: 1px solid #ffeeba;
 }
+
+.footer {
+    margin-top: 40px;
+    padding: 20px 10px;
+    text-align: center;
+    font-size: 14px;
+    color: #555;
+    border-top: 1px solid #ddd;
+}
+
+.footer a {
+    color: #0a66c2; /* LinkedIn blue */
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.footer a:hover {
+    text-decoration: underline;
+}

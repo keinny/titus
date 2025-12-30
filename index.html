@@ -1,14 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AFRICO Cash Advance Limited</title>
-
-<!-- CSS -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AFRICO Cash Advance Limited</title>
     <link rel="stylesheet" href="css/styles.css">
-
-    <!-- JS -->
     <script src="js/script.js" defer></script>
 </head>
 
@@ -16,210 +12,203 @@
 
 <div class="container">
 
-<div class="logo">
-    <img src="images/logo_3.png" alt="AFRICO Cash Advance Limited Logo">
-</div>
+    <div class="logo">
+        <img src="images/logo_3.png" alt="AFRICO Cash Advance Limited Logo">
+    </div>
 
-<h2>Elevating finances, Empowering Lives</h2>
+    <h2>Elevating finances, Empowering Lives</h2>
 
-<div class="tabs">
-    <div class="tab active" onclick="showTab('new')">New Customer</div>
-    <div class="tab" onclick="showTab('old')">Old Customer</div>
-</div>
+    <div class="tabs">
+        <div class="tab active" onclick="showTab('new')">New Customer</div>
+        <div class="tab" onclick="showTab('old')">Old Customer</div>
+    </div>
 
-<!-- ================= NEW CUSTOMER ================= -->
-<div class="section active" id="new">
+    <div class="section active" id="new">
+        <h3>Loan Application Form – New Customer</h3>
 
-<h3>Loan Application Form – New Customer</h3>
+        <label>First Name *</label>
+        <input type="text" id="firstName" required>
 
-<label>First Name *</label>
-<input type="text" required>
+        <label>Surname *</label>
+        <input type="text" id="surname" required>
 
-<label>Surname *</label>
-<input type="text" required>
+        <label>Email *</label>
+        <input type="email" id="emailNew" required>
 
-<label>Email *</label>
-<input type="email" required>
+        <label>Phone Number *</label>
+        <input type="tel" id="phone" required>
 
-<label>Phone Number *</label>
-<input type="tel" required>
+        <label>Gender *</label>
+        <select id="gender" required>
+            <option value="">Select</option>
+            <option>Male</option>
+            <option>Female</option>
+        </select>
 
-<label>Gender *</label>
-<select required>
-    <option value="">Select</option>
-    <option>Male</option>
-    <option>Female</option>
-</select>
+        <label>Marital Status *</label>
+        <select id="marital" required>
+            <option value="">Select</option>
+            <option>Single</option>
+            <option>Married</option>
+        </select>
 
-<label>Marital Status *</label>
-<select required>
-    <option value="">Select</option>
-    <option>Single</option>
-    <option>Married</option>
-</select>
+        <label>Province *</label>
+        <select id="province" onchange="loadDistricts()" required>
+            <option value="">Select Province</option>
+            <option value="Central">Central</option>
+            <option value="Copperbelt">Copperbelt</option>
+            <option value="Eastern">Eastern</option>
+            <option value="Luapula">Luapula</option>
+            <option value="Lusaka">Lusaka</option>
+            <option value="Muchinga">Muchinga</option>
+            <option value="Northern">Northern</option>
+            <option value="North-Western">North-Western</option>
+            <option value="Southern">Southern</option>
+            <option value="Western">Western</option>
+        </select>
 
-<label>Province *</label>
-<select id="province" onchange="loadDistricts()" required>
-    <option value="">Select Province</option>
-    <option value="Central">Central</option>
-    <option value="Copperbelt">Copperbelt</option>
-    <option value="Eastern">Eastern</option>
-    <option value="Luapula">Luapula</option>
-    <option value="Lusaka">Lusaka</option>
-    <option value="Muchinga">Muchinga</option>
-    <option value="Northern">Northern</option>
-    <option value="North-Western">North-Western</option>
-    <option value="Southern">Southern</option>
-    <option value="Western">Western</option>
-</select>
+        <label>District *</label>
+        <select id="district" required>
+            <option value="">Select District</option>
+        </select>
 
-<label>District *</label>
-<select id="district" required>
-    <option value="">Select District</option>
-</select>
+        <label>Area *</label>
+        <input type="text" id="area" required>
 
-<label>Area *</label>
-<input type="text" required>
+        <label>Attach NRC / ID *</label>
+        <input type="file" id="nrcFile" required>
 
-<label>Attach NRC / ID *</label>
-<input type="file" required>
+        <label>Employment Status *</label>
+        <select id="employment" required>
+            <option value="">Select</option>
+            <option>Employed</option>
+            <option>Self-Employed</option>
+            <option>Unemployed</option>
+        </select>
 
-<label>Employment Status *</label>
-<select required>
-    <option value="">Select</option>
-    <option>Employed</option>
-    <option>Self-Employed</option>
-    <option>Unemployed</option>
-</select>
+        <label>Upload Latest Payslip / Airtel Money Statement *</label>
+        <input type="file" id="payslipFileNew" required>
 
-<label>Upload Latest Payslip / Airtel Money Statement *</label>
-<input type="file" required>
+        <label>Guarantor Name *</label>
+        <input type="text" id="guarantorNew" required>
 
-<label>Password (if required to view statement)</label>
-<input type="text">
+        <label>Relationship with Guarantor *</label>
+        <input type="text" id="relationshipNew" required>
 
-<label>Guarantor Name *</label>
-<input type="text" required>
+        <label>Guarantor Phone # *</label>
+        <input type="tel" id="guarantorPhoneNew" required>
 
-<label>Relationship with Guarantor *</label>
-<input type="text" required>
+        <label>How did you know about us? *</label>
+        <select id="referral" required>
+            <option value="">Select</option>
+            <option>Facebook / WhatsApp / TikTok</option>
+            <option>Through a Friend</option>
+            <option>One-on-one Encounter</option>
+        </select>
 
-<label>Guarantor Phone # *</label>
-<input type="tel" required>
+        <label>Repayment Method *</label>
+        <select id="repayment" required>
+            <option value="">Select</option>
+            <option>Mobile Money</option>
+            <option>Bank Transfer</option>
+            <option>Cash</option>
+        </select>
 
-<label>How did you know about us? *</label>
-<select required>
-    <option value="">Select</option>
-    <option>Facebook / WhatsApp / TikTok</option>
-    <option>Through a Friend</option>
-    <option>One-on-one Encounter</option>
-</select>
+        <label>Purpose of The Loan *</label>
+        <select id="purpose" required>
+            <option value="">Select</option>
+            <option>Business</option>
+            <option>School/Tuition Fees</option>
+            <option>Medical</option>
+            <option>Rent</option>
+            <option>Emergency</option>
+        </select>
 
-<label>Repayment Method *</label>
-<select required>
-    <option value="">Select</option>
-    <option>Mobile Money</option>
-    <option>Bank Transfer</option>
-    <option>Cash</option>
-</select>
+        <h4>LOAN DETAILS</h4>
 
-<label>Purpose of The Loan *</label>
-<select required>
-    <option value="">Select</option>
-    <option>Business</option>
-    <option>School/Tuition Fees</option>
-    <option>Medical</option>
-    <option>Rent</option>
-    <option>Emergency</option>
-</select>
+        <label>Loan Amount (ZMW) <i>Max 1000</i></label>
+        <input type="number" id="loanAmountNew" min="50" max="1000" oninput="limitNewLoan(); calculate('new')" required>
 
-<h4>LOAN DETAILS</h4>
+        <label>Loan Duration</label>
+        <select id="loanWeekNew" onchange="calculate('new')">
+            <option value="">Select</option>
+            <option value="1">7 Days (15%)</option>
+            <option value="2">14 Days (20%)</option>
+            <option value="3">21 Days (30%)</option>
+            <option value="4">30 Days (35%)</option>
+        </select>
 
-<label>Loan Amount (ZMW) <i>Maximum amount is 1000 (ZMW)</i></label>
-<input type="number" id="loanAmountNew" min="50" max="1000" oninput="limitNewLoan(); calculate('new')" required>
+        <div class="summary" id="summaryNew"></div>
 
-<label>Loan Duration</label>
-<select id="loanWeekNew" onchange="calculate('new')">
-    <option value="">Select</option>
-    <option value="1">7 Days (15%)</option>
-    <option value="2">14 Days (20%)</option>
-    <option value="3">21 Days (30%)</option>
-    <option value="4">30 Days (35%)</option>
-</select>
+        <div class="disclaimer">
+            <strong>DISCLAIMER – IMPORTANT NOTICE:</strong><br>
+            This Agreement is executed electronically and shall be deemed legally binding once submitted.
+        </div>
 
-<div class="summary" id="summaryNew"></div>
+        <input type="checkbox" id="termsNew" onclick="toggleSubmit('new')">
+        <label>I agree to the <a href="terms.html" target="_blank">Terms and Conditions</a></label>
 
-<div class="disclaimer">
-<strong>DISCLAIMER – IMPORTANT NOTICE:</strong><br>
-This Agreement is executed electronically and shall be deemed legally binding once submitted.
-</div>
+        <button id="submitNew" disabled onclick="submitForm('new')">Submit Application</button>
+    </div>
 
-<input type="checkbox" id="termsNew" onclick="toggleSubmit('new')">
-<label>I agree to the <a href="terms.html" target="_blank">Terms and Conditions</a></label>
+    <div class="section" id="old">
+        <h3>Loan Agreement – Old Customer</h3>
 
-<button id="submitNew" disabled>Submit Application</button>
+        <label>Email *</label>
+        <input type="email" id="emailOld" required>
 
-</div>
+        <label>Borrower Full Name *</label>
+        <input type="text" id="fullNameOld" required>
 
-<!-- ================= EXISTING CUSTOMER ================= -->
-<div class="section" id="old">
+        <label>NRC / ID *</label>
+        <input type="text" id="nrcOld" required>
 
-<h3>Loan Agreement – Old Customer</h3>
+        <label>Upload Latest Payslip / Airtel Money Statement *</label>
+        <input type="file" id="payslipFileOld" required>
 
-<label>Email *</label>
-<input type="email" required>
+        <label>Guarantor Name *</label>
+        <input type="text" id="guarantorOld" required>
 
-<label>Borrower Full Name *</label>
-<input type="text" required>
+        <label>Relationship with Guarantor *</label>
+        <input type="text" id="relationshipOld" required>
 
-<label>NRC / ID *</label>
-<input type="text" required>
+        <label>Guarantor Phone # *</label>
+        <input type="tel" id="guarantorPhoneOld" required>
 
-<label>Upload Latest Payslip / Airtel Money Statement *</label>
-<input type="file" required>
+        <label>Loan Amount (ZMW) <i>Max 10,000</i></label>
+        <input type="number" id="loanAmountOld" min="500" max="10000" oninput="limitOldLoan(); calculate('old')" required>
 
-<label>Password (if required to view statement)</label>
-<input type="text">
+        <label>Loan Duration</label>
+        <select id="loanWeekOld" onchange="calculate('old')">
+            <option value="">Select</option>
+            <option value="1">7 Days (15%)</option>
+            <option value="2">14 Days (20%)</option>
+            <option value="3">21 Days (30%)</option>
+            <option value="4">30 Days (35%)</option>
+        </select>
 
-<label>Guarantor Name *</label>
-<input type="text" required>
+        <div class="summary" id="summaryOld"></div>
 
-<label>Relationship with Guarantor *</label>
-<input type="text" required>
+        <label>Upload Collateral *</label>
+        <input type="file" id="collateralFile" required>
 
-<label>Guarantor Phone # *</label>
-<input type="tel" required>
+        <div class="disclaimer">
+            <strong>DISCLAIMER:</strong><br>
+            Loan renewal does not guarantee automatic approval.
+        </div>
 
-<label>Loan Amount (ZMW) <i>Maximum amount is 5000 (ZMW)</i></label>
-<input type="number" id="loanAmountOld" min="500" max="5000" oninput="limitOldLoan(); calculate('old')" required>
+        <input type="checkbox" id="termsOld" onclick="toggleSubmit('old')">
+        <label>I agree to the <a href="terms.html" target="_blank">Terms and Conditions</a></label>
 
-<label>Loan Duration</label>
-<select id="loanWeekOld" onchange="calculate('old')">
-    <option value="">Select</option>
-    <option value="1">7 Days (15%)</option>
-    <option value="2">14 Days (20%)</option>
-    <option value="3">21 Days (30%)</option>
-    <option value="4">30 Days (35%)</option>
-</select>
-
-<div class="summary" id="summaryOld"></div>
-
-<label>Upload Collateral *</label>
-<input type="file" required>
-
-<div class="disclaimer">
-<strong>DISCLAIMER:</strong><br>
-Loan renewal does not guarantee automatic approval.
-</div>
-
-<input type="checkbox" id="termsOld" onclick="toggleSubmit('old')">
-<label>I agree to the <a href="terms.html" target="_blank">Terms and Conditions</a></label>
-
-<button id="submitOld" disabled>Submit Application</button>
+        <button id="submitOld" disabled onclick="submitForm('old')">Submit Application</button>
+    </div>
 
 </div>
 
-</div>
+<footer class="footer">
+    <p>© 2025 AFRICO Cash Advance Limited | All Rights Reserved.</p>
+    <p>📞 Contact: <a href="tel:+260977337551">+260 977 337 551</a></p>
+</footer>
 
 </body>
 </html>
