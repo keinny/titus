@@ -126,7 +126,7 @@
 
         <h4>LOAN DETAILS</h4>
 
-        <label>Loan Amount (ZMW) <i>Max 1000</i></label>
+        <label>Loan Amount (ZMW) <i>Max 1,000</i></label>
         <input type="number" id="loanAmountNew" min="50" max="1000" oninput="limitNewLoan(); calculate('new')" required>
 
         <label>Loan Duration</label>
@@ -141,8 +141,15 @@
         <div class="summary" id="summaryNew"></div>
 
         <div class="disclaimer">
-            <strong>DISCLAIMER – IMPORTANT NOTICE:</strong><br>
-            This Agreement is executed electronically and shall be deemed legally binding once submitted.
+            <strong>DISCLAIMER:</strong><br>
+            
+            <strong>IMPORTANT NOTICE:</strong><br>
+            This document is a <strong>Loan Application Form and does not constitute a loan Agreement.</strong><br>
+            Submitting this appliaction <strong>does not guarentee loan approval.</strong><br>
+            The lender will assess the information provided and if approved, a separate Loan Agreement will be issued for signature.<br>
+            No funds will be disbursed until a formal <strong>Loan Agreement</strong> has been signed by both parties.
+            <br>
+
         </div>
 
         <input type="checkbox" id="termsNew" onclick="toggleSubmit('new')">
@@ -194,7 +201,8 @@
 
         <div class="disclaimer">
             <strong>DISCLAIMER:</strong><br>
-            Loan renewal does not guarantee automatic approval.
+
+            This Agreement is executed electronically and shall be deemed legally binding once submitted.
         </div>
 
         <input type="checkbox" id="termsOld" onclick="toggleSubmit('old')">
