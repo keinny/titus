@@ -143,8 +143,9 @@ async function submitForm(type) {
     } else {
       payload = {
         customerType: "old",
-        email: document.getElementById("emailOld").value,
         fullName: document.getElementById("fullNameOld").value,
+        email: document.getElementById("emailOld").value,
+        phone: document.getElementById("phoneOld").value,
         nrc: document.getElementById("nrcOld").value,
 
         province: document.getElementById("provinceOld").value,
