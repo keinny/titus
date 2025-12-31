@@ -74,6 +74,23 @@ function loadDistricts() {
     });
 }
 
+function loadDistrictsOld() {
+  const province = document.getElementById("provinceOld").value;
+  const districtSelect = document.getElementById("districtOld");
+
+  // clear existing districts
+  districtSelect.innerHTML = `<option value="">Select District</option>`;
+
+  if (!province || !districtsByProvince[province]) return;
+
+  districtsByProvince[province].forEach(district => {
+    const opt = document.createElement("option");
+    opt.value = district;
+    opt.textContent = district;
+    districtSelect.appendChild(opt);
+  });
+}
+
 function fileToBase64(file) {
   if (!file) return Promise.resolve({name: "none", type: "none", data: ""});
   return new Promise(resolve => {
@@ -119,7 +136,7 @@ async function submitForm(type) {
         purpose: document.getElementById("purpose").value,
         loanAmount: document.getElementById("loanAmountNew").value,
         loanWeeks: document.getElementById("loanWeekNew").value,
-        totalPayable: document.getElementById("summaryNew").innerText,
+        totalPayable: document.getElementById("summaryNew").innerText.match(/[\d\.]+/g)[0],
         nrcFile: await fileToBase64(document.getElementById("nrcFile").files[0]),
         payslipFile: await fileToBase64(document.getElementById("payslipFileNew").files[0])
       };
@@ -129,14 +146,27 @@ async function submitForm(type) {
         email: document.getElementById("emailOld").value,
         fullName: document.getElementById("fullNameOld").value,
         nrc: document.getElementById("nrcOld").value,
+
+        province: document.getElementById("provinceOld").value,
+        district: document.getElementById("districtOld").value,
+        area: document.getElementById("areaOld").value,
+
         guarantor: document.getElementById("guarantorOld").value,
         relationship: document.getElementById("relationshipOld").value,
         guarantorPhone: document.getElementById("guarantorPhoneOld").value,
+        repayment: document.getElementById("repaymentOld").value,
+        purpose: document.getElementById("purposeOld").value,
         loanAmount: document.getElementById("loanAmountOld").value,
         loanWeeks: document.getElementById("loanWeekOld").value,
-        totalPayable: document.getElementById("summaryOld").innerText,
-        payslipFile: await fileToBase64(document.getElementById("payslipFileOld").files[0]),
-        collateralFile: await fileToBase64(document.getElementById("collateralFile").files[0])
+        totalPayable: document.getElementById("summaryOld").innerText.match(/[\d\.]+/g)[0],
+
+        payslipFile: await fileToBase64(
+          document.getElementById("payslipFileOld").files[0]
+        ),
+        collateralFile: await fileToBase64(
+          document.getElementById("collateralFile").files[0]
+        )
+
       };
     }
 
