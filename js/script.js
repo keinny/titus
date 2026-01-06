@@ -199,7 +199,7 @@ async function submitForm(type) {
                 province: document.getElementById("provinceOld").value,
                 district: document.getElementById("districtOld").value,
                 area: document.getElementById("areaOld").value,
-                workadd: document.getElementById("workaddOld").value,
+                workaddOld: document.getElementById("workaddOld").value,
                 guarantor: document.getElementById("guarantorOld").value,
                 relationship: document.getElementById("relationshipOld").value,
                 guarantorPhone: document.getElementById("guarantorPhoneOld").value,
