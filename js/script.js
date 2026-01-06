@@ -78,7 +78,7 @@ function calculate(type) {
 
 function limitNewLoan() {
     const val = document.getElementById("loanAmountNew");
-    if (val.value > 1000) val.value = 1000;
+    if (val.value > 5000) val.value = 5000;
 }
 
 function limitOldLoan() {
@@ -174,6 +174,7 @@ async function submitForm(type) {
                 province: document.getElementById("province").value,
                 district: document.getElementById("district").value,
                 area: document.getElementById("area").value,
+                workadd: document.getElementById("workadd").value,
                 employment: document.getElementById("employment").value,
                 guarantor: document.getElementById("guarantorNew").value,
                 relationship: document.getElementById("relationshipNew").value,
@@ -198,6 +199,7 @@ async function submitForm(type) {
                 province: document.getElementById("provinceOld").value,
                 district: document.getElementById("districtOld").value,
                 area: document.getElementById("areaOld").value,
+                workadd: document.getElementById("workaddOld").value,
                 guarantor: document.getElementById("guarantorOld").value,
                 relationship: document.getElementById("relationshipOld").value,
                 guarantorPhone: document.getElementById("guarantorPhoneOld").value,
